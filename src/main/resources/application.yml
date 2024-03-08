@@ -1,0 +1,60 @@
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+#swagger config
+springdoc:
+  api-docs:
+    enabled: true
+
+spring:
+  application:
+    name: BrewBuddie-Reward-System
+  messages:
+    basename: messages
+    fallback-to-system-locale: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/brewbuddie?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 10
+      max-lifetime: 1800000
+      idle-timeout: 30000
+  batch:
+    jdbc:
+      initialize-schema: "always"
+    job:
+      enabled: false
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  app:
+    cors:
+      allowed-origins: '*'
+      allowed-methods: '*'
+      allowed-headers: '*'
+      exposed-headers: 'Authorization,Link,X-Total-Count,Set-Cookie,X-Auth-Token,'
+      max-age: 1800
+    jwt:
+      password: $2a$12$Cba2dlArD6WfgUC9VGgE8.UmK210l1tFXUrZ9YrqaXTHdx46Hovoy
+      expiration-time: 600000
+
+notification:
+  service:
+    sms:
+      mock: true
+    email:
+      mock: true
+
+activation-code:
+  generation-service:
+    mock: true
